@@ -10,7 +10,6 @@ export const getPopular = async () => {
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`
     );
     const data = response.data;
-    console.log(data); // Pour déboguer
     return data;
   } catch (error) {
     console.error("Erreur lors de la récupération des données : ", error);
