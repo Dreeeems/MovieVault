@@ -1,0 +1,26 @@
+:root {
+  --scrollbar-color: #1f1e1e;
+}
+body {
+  color-scheme: dark;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  border-radius: 30px;
+  background-color: var(--scrollbar-color);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: inherit;
+  background-color: #3a3b3c;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-color);
+  border-radius: (inherit);
+  border-radius: 30px;
+}

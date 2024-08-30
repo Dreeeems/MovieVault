@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { getPopular } from "../util/fetchFromApi";
+import { getUpcomming, getPopular, getTopRate } from "../util/fetchFromApi";
 import NavBar from "../components/navbar";
 import SearchBar from "../components/searbar";
 import Feed from "../components/fed";
 
 const Home = () => {
-  const [movies, setMovies] = useState(null);
+  const [popular, setPopular] = useState(null);
+  const [topRate, setTopRate] = useState(null);
+  const [upcomming, setUpcomming] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const data = await getPopular();
-        setMovies(data);
-        console.log(movies);
+        let data = await getPopular();
+        setPopular(data);
+        data = await getTopRate();
+        setTopRate(data);
+        data = await getUpcomming();
+        setUpcomming(data);
+        console.log(popular);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -35,9 +41,21 @@ const Home = () => {
         <SearchBar />
       </div>
       <div>
-        {movies && movies.results && movies.results.length > 0 ? (
+        {popular &&
+        popular.results &&
+        popular.results.length > 0 &&
+        topRate &&
+        topRate.results &&
+        topRate.results.length > 0 &&
+        upcomming &&
+        upcomming.results &&
+        upcomming.results.length > 0 ? (
           <div>
-            <Feed videos={movies.results} />
+            <Feed
+              populars={popular.results}
+              topRate={topRate.results}
+              upcomming={upcomming.results}
+            />
           </div>
         ) : (
           <div>No Movies Available</div>
